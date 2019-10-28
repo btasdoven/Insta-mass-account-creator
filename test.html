@@ -1,0 +1,45 @@
+<html>
+
+    <script>
+        function load_page(){
+
+            i = 0
+            qr=new XMLHttpRequest();
+            qr.open('get','https://www.instagram.com');
+            //qr.withCredentials = true;
+            //qr.setRequestHeader('x-csrftoken', document.cookie)
+            qr.send();
+            qr.onload=function()
+            {
+                i++;
+                console.log(qr.responseText)
+                var csrfToken = qr.getAllResponseHeaders();
+                console.log(csrfToken)
+
+                if (i == 2)
+                {
+                    return;
+                }
+                qr.open('POST', 'https://www.instagram.com/accounts/web_create_ajax/', false);
+                qr.setRequestHeader('referer', 'https://www.instagram.com');
+                qr.setRequestHeader('x-csrftoken', 'xxx');
+
+                qr.send();
+            }
+        };
+
+        function runQuery()
+        {
+            ch = window.open("http://www.instagram.com","_incognito","height=200,width=400,status=yes,toolbar=no,menubar=no,location=no")
+            console.log(ch);
+            ch.onload = function () {
+                console.log(ch)
+                ch.document.getElementByName('emailOrPhone').value = 'asdqwe'
+            };  
+        }
+
+        //load_page();
+    </script>
+
+<button onclick="runQuery()">asc</button>
+</html>

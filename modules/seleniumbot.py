@@ -5,7 +5,7 @@
 
 from time import sleep
 from random import randint
-
+from fake_useragent import UserAgent
 import modules.config as config
 # importing generated info
 import modules.generateaccountinformation as accnt
@@ -45,11 +45,13 @@ class AccountCreator():
             chrome_options.add_argument('--proxy-server=%s' % proxy)
 
         # chrome_options.add_argument('headless')
-        # ua = UserAgent()
-        # user_agent = ua.random
-        chrome_options.add_argument('--user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.80 Safari/537.36"')
-        # chrome_options.add_argument("--incognito")
+        ua = UserAgent()
+        user_agent = ua.random
+        # user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36'
+        chrome_options.add_argument('--user-agent="%s"' % user_agent)
+        chrome_options.add_argument("--incognito")
         chrome_options.add_argument('window-size=1200x600')
+        chrome_options.add_argument('--no-sandbox')
         driver = webdriver.Chrome(chrome_options=chrome_options, executable_path=config.Config['chromedriver_path'])
         print('Opening Browser')
         driver.get(self.url)
@@ -126,6 +128,11 @@ class AccountCreator():
 
 
         sleep(4)
+
+        search_button = driver.find_element_by_xpath('//input[@placeholder="Search"]')
+        action_chains.move_to_element(search_button)
+        search_button.send_keys('letsbefity')
+
         # After the first fill save the account account_info
         store(account_info)
         

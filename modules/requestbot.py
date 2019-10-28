@@ -98,7 +98,7 @@ class CreateAccount:
                 proxies = {"http": "http://" + current_socket, "https": "https://" + current_socket}
                 session = requests.Session()
                 try:
-                    session_start = session.get(self.url,   proxies=proxies);
+                    session_start = session.get(self.url,   proxies=proxies)
                     session.headers.update({'referer' : self.referer_url,'x-csrftoken' : session_start.cookies['csrftoken']})
 
                     create_request = session.post(self.url, data=payload, allow_redirects=True)
