@@ -39,7 +39,7 @@ All username are stored in Assets/usernames.txt
 This script creates an account with random name and get it form the web. All user created are older 18 years
 
 ### Important
--  The new fake Instagram account with an unverified phone number after ~ 1-24 hours could not do any requests. All requests will be redirected to the page           
+-  The new fake Instagram account with an unverified phone number won't be able to do any requests after ~ 1-24 hours. All requests will be redirected to the page           
 <a href="https://instagram.com/challenge">https://instagram.com/challenge</a>
 
 ### contribution
